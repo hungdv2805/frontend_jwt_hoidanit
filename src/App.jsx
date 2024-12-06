@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react'
 import axios from './ultil/axios.custommize'
+import Header from './components/layout/Header'
+
+import {Outlet } from'react-router-dom'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -12,7 +15,8 @@ function App() {
   },[])
   return (
     <>
-      Hello world!
+     <Header />
+     <Outlet/>
     </>
   )
 }
