@@ -6,7 +6,7 @@ const UserPage = () => {
     const [dataSource, setDataSource] = useState([]);
 
     useEffect(() => {
-        const fetchUser = async (user) => {
+        const fetchUser = async () => {
             const res = await getUserAPI()
             if(res){
                 setDataSource(res)
