@@ -9,7 +9,7 @@ function App() {
   useEffect(() =>{
     const fetchHelloWorld = async() =>{
       const response = await axios.get(`/v1/api/`)
-      console.log(response)
+      //console.log(response)
     }
     fetchHelloWorld()
   },[])

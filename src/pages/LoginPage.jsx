@@ -1,37 +1,30 @@
 import React from "react";
 import { Button, Form, Input, notification } from "antd";
-import { createUserAPI } from "../ultil/api";
+import { loginUserAPI } from "../ultil/api";
 import { useNavigate } from "react-router-dom";
 
-function RegisterPage() {
-    const [form] = Form.useForm();
+function LoginPage() {
     const navigation = useNavigate()
 
     const onFinish = async (values) => {
-        const { name, email, password } = values;
-        const res = await createUserAPI(name, email, password)
+        const { email, password } = values;
+        const res = await loginUserAPI( email, password)
 
         if(res && res.EC === 0){
+            localStorage.setItem('access_token', res.access_token)
             notification.success({
-                message: "Register Success",
-                description: "You have registered successfully",
+                message: "Login Success",
+                description: "You have login successfully",
                 duration: 2,
             })
-            navigation('/login')
+            navigation('/')
         }
         else{
-            const errorMessage = res?.EM ?? "Failed to register. Please try again later";
             notification.error({
-                message: "Register Failed",
-                description: errorMessage,
+                message: "Login Failed",
+                description: res?.EM ?? 'error',
                 duration: 2,
             })
-            form.setFields([
-                {
-                    name: 'email', // Giả sử lỗi liên quan đến trường email
-                    errors: [errorMessage],
-                },
-            ]);
         }
         //console.log("res:", res);
     };
@@ -41,7 +34,6 @@ function RegisterPage() {
     return ( 
         <div style={{margin: 50}}>
             <Form
-                form={form}
                 name="basic"
                 labelCol={{
                 span: 8,
@@ -80,21 +72,9 @@ function RegisterPage() {
             >
             <Input.Password />
             </Form.Item>
-            <Form.Item
-                label="Name"
-                name="name"
-                rules={[
-                    {
-                    required: true,
-                    message: "Please input your name!",
-                    },
-                ]}
-            >
-            <Input />
-            </Form.Item>
             <Form.Item>
             <Button type="primary" htmlType="submit">
-                Submit
+                Login
             </Button>
             </Form.Item>
         </Form>
@@ -102,4 +82,4 @@ function RegisterPage() {
      );
 }
 
-export default RegisterPage;
+export default LoginPage;

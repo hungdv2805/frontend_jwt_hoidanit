@@ -4,7 +4,7 @@ import App from './App.jsx'
 import './styles/global.css'
 
 import RegisterPage from './pages/RegisterPage.jsx'
-
+import LoginPage from './pages/LoginPage.jsx'
 import UserPage from './pages/UserPage.jsx'
 
 import {
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path:true,
+        index:true,
         element: <HomePage/>,
       },
       {
@@ -31,6 +31,10 @@ const router = createBrowserRouter([
   {
     path:"/register",
     element: <RegisterPage/>,
+  },
+  {
+    path:"/login",
+    element: <LoginPage/>,
   }
 ])
 
