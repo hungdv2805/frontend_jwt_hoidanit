@@ -12,6 +12,7 @@ import {
   RouterProvider
 } from "react-router-dom"
 import HomePage from './pages/HomePage.jsx'
+import { AuthWrapper } from './components/context/auth.context.jsx'
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,8 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     {/* <App /> */}
-    <RouterProvider router={router} />
+    <AuthWrapper>
+      <RouterProvider router={router} />
+    </AuthWrapper>
   </React.StrictMode>,
 )
